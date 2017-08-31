@@ -3,7 +3,7 @@ Yocto layer for Electricity Exchange Products
 
 # Replacing bits on SD card
 1. Copy over the bits built using yocto using scp to the running target connected over internet. Use the below command
-scp -P <ssh-port> -i <path-to-ssh-key> <path-to-file-to-copy> cgw1@bsp.electricityexchange.ie:
+scp -P (ssh-port) -i (path-to-ssh-key) (path-to-file-to-copy) cgw1@bsp.electricityexchange.ie:
 
 2. ssh the target and move the bits to required location. Place kernel image and devicetree to boot partition on SD card
 based rootfs.
@@ -18,8 +18,14 @@ run bootargs_emmc;bootm ${loadaddr} - ${fdt_addr}
 
 # GPS testing
 1. Export GPIO1[10] pin (GPIO pin number 42). It is used to drive nReset signal.
+root@var-som-mx6:~# echo 42 > /sys/class/gpio/export
+
 2. Set it to output.
+root@var-som-mx6:~# echo out > /sys/class/gpio/gpio42/direction
+
 3. Set it's value to 1 to de-assert reset condition.
+root@var-som-mx6:~# echo 1 > /sys/class/gpio/gpio42/value
+
 4. Launch minicom on /dev/ttymxc2 from an ssh shell to target.
 5. Set serial settings to 96008N1.
 6. You should see some strings on minicom.
