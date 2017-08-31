@@ -1,0 +1,33 @@
+From 085c068d9720ca82653a8e92c391cf3d2ed8ba53 Mon Sep 17 00:00:00 2001
+From: Yasir Khan <yasir_electronics@yahoo.com>
+Date: Sat, 26 Aug 2017 21:05:35 +0800
+Subject: [PATCH 3/3] usb/serial/option: add reset resume
+
+Some USB host controllers/USB hubs will lost power
+or be reset when MCU entering into suspend/sleep
+mode, and they cannot resume USB devices when MCU
+exiting from suspend/sleep mode; instead, they
+will operate reset-resume. Add reset-resume handler.
+
+Signed-off-by: Yasir Khan <yasir_electronics@yahoo.com>
+---
+ drivers/usb/serial/option.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/usb/serial/option.c b/drivers/usb/serial/option.c
+index 948eec4..23f2143 100644
+--- a/drivers/usb/serial/option.c
++++ b/drivers/usb/serial/option.c
+@@ -1841,6 +1841,9 @@ static struct usb_serial_driver option_1port_device = {
+ #ifdef CONFIG_PM
+ 	.suspend           = usb_wwan_suspend,
+ 	.resume            = usb_wwan_resume,
++#if 1 //Added by Quectel
++	.reset_resume      = usb_wwan_resume,
++#endif
+ #endif
+ };
+ 
+-- 
+1.9.1
+

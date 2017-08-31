@@ -1,0 +1,34 @@
+From 6596fdb71ea1b977bcd0279c676480b87bbde38f Mon Sep 17 00:00:00 2001
+From: Yasir Khan <yasir_electronics@yahoo.com>
+Date: Sun, 27 Aug 2017 23:52:58 +0800
+Subject: [PATCH] imx6qdl-var-som: remove CTS/RTS lines from gps uart
+
+Signed-off-by: Yasir Khan <yasir_electronics@yahoo.com>
+---
+ arch/arm/boot/dts/imx6qdl-var-som.dtsi | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-var-som.dtsi b/arch/arm/boot/dts/imx6qdl-var-som.dtsi
+index ca3fd38..d520249 100644
+--- a/arch/arm/boot/dts/imx6qdl-var-som.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-var-som.dtsi
+@@ -533,8 +533,6 @@
+ 			fsl,pins = <
+ 				MX6QDL_PAD_EIM_D25__UART3_RX_DATA	0x1b0b1
+ 				MX6QDL_PAD_EIM_D24__UART3_TX_DATA	0x1b0b1
+-				MX6QDL_PAD_EIM_D23__UART3_CTS_B		0x1b0b1
+-				MX6QDL_PAD_EIM_EB3__UART3_RTS_B		0x1b0b1
+ 			>;
+ 		};
+ 
+@@ -732,7 +730,6 @@
+ &uart3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart3_2>;
+-	fsl,uart-has-rtscts;
+ 	status = "okay";
+ };
+ 
+-- 
+1.9.1
+
