@@ -1,3 +1,8 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
+SRC_URI_append = " \
+	file://0001-add-device-tree-for-imx6q-elecex-zgateway.patch \
+"
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
 
