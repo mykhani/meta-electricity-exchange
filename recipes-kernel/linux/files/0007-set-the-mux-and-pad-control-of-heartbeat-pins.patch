@@ -1,0 +1,30 @@
+From 05eda03ce118de2fe49267ca11db7a9d3f0bf7b5 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Mon, 25 Sep 2017 20:19:30 +0100
+Subject: [PATCH] set the mux and pad control of heartbeat pins
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/boot/dts/imx6q-elecex-zgateway.dts | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6q-elecex-zgateway.dts b/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
+index 1a7097e..479654e 100644
+--- a/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
++++ b/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
+@@ -46,6 +46,12 @@
+ 				MX6QDL_PAD_SD2_DAT0__GPIO1_IO15		0x1b0b0
+ 				/* LTE RF reset */
+ 				MX6QDL_PAD_SD2_CMD__GPIO1_IO11		0x1b0b0
++				/* HEARTBEAT_1 */
++				MX6QDL_PAD_SD4_DAT6__GPIO2_IO14		0x1b0b0
++				/* HEARTBEAT_2 */
++				MX6QDL_PAD_GPIO_1__GPIO1_IO01		0x1b0b0
++				/* HEARTBEAT_3 */
++				MX6QDL_PAD_GPIO_9__GPIO1_IO09		0x1b0b0
+ 			>;
+ 		};
+ 
+-- 
+2.7.4
+

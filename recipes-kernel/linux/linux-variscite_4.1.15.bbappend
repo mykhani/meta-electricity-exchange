@@ -6,6 +6,8 @@ SRC_URI_append = " \
 	file://0003-usb-serial-usb_wwan-add-zero-packet-mechanism.patch \
 	file://0004-usb-serial-option-add-reset-resume.patch \
 	file://0005-set-pad-mux-and-control-for-GPS-and-LTE.patch \
+	file://0006-fix-indentation-in-the-device-tree.patch \
+	file://0007-set-the-mux-and-pad-control-of-heartbeat-pins.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"

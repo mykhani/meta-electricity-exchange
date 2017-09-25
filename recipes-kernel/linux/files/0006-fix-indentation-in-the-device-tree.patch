@@ -1,0 +1,81 @@
+From 9597144efd0cc1edd28ac66d656e0744f9266188 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Mon, 25 Sep 2017 20:15:38 +0100
+Subject: [PATCH] fix indentation in the device tree
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/boot/dts/imx6q-elecex-zgateway.dts | 42 ++++++++++++++---------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx6q-elecex-zgateway.dts b/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
+index 34701d8..1a7097e 100644
+--- a/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
++++ b/arch/arm/boot/dts/imx6q-elecex-zgateway.dts
+@@ -20,42 +20,42 @@
+ 		pinctrl_hog_1: hoggrp_1 {
+ 			fsl,pins = <
+ 				/* CTW6120 IRQ */
+-				MX6QDL_PAD_EIM_DA7__GPIO3_IO07          0x80000000
++				MX6QDL_PAD_EIM_DA7__GPIO3_IO07		0x80000000
+ 				/* for Bluetooth/wifi enable */
+-				MX6QDL_PAD_SD3_DAT6__GPIO6_IO18         0x1b0b1
++				MX6QDL_PAD_SD3_DAT6__GPIO6_IO18		0x1b0b1
+ 				/* SDMMC2 CD/WP */
+-				MX6QDL_PAD_KEY_COL4__GPIO4_IO14         0x80000000
+-				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15         0x80000000
++				MX6QDL_PAD_KEY_COL4__GPIO4_IO14		0x80000000
++				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x80000000
+ 				/* USBOTG ID pin */
+-				/*MX6QDL_PAD_GPIO_4__GPIO1_IO04         0x80000000*/
++				/*MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x80000000*/
+ 				/* PMIC INT */
+-				MX6QDL_PAD_GPIO_17__GPIO7_IO12          0x80000000
++				MX6QDL_PAD_GPIO_17__GPIO7_IO12		0x80000000
+ 				/* Wifi Slow Clock */
+-				MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT    0x000b0
++				MX6QDL_PAD_ENET_RXD0__OSC32K_32K_OUT	0x000b0
+ 				/* Audio Clock */
+-				MX6QDL_PAD_GPIO_0__CCM_CLKO1            0x130b0
++				MX6QDL_PAD_GPIO_0__CCM_CLKO1		0x130b0
+ 				/* Audio reset */
+-				MX6QDL_PAD_GPIO_19__GPIO4_IO05          0x178b0
++				MX6QDL_PAD_GPIO_19__GPIO4_IO05		0x178b0
+ 				/* Camera Clock */
+-				MX6QDL_PAD_GPIO_3__CCM_CLKO2            0x130b0
++				MX6QDL_PAD_GPIO_3__CCM_CLKO2		0x130b0
+ 				/* Resistive touch irq */
+-				MX6QDL_PAD_DISP0_DAT4__GPIO4_IO25       0x178b0
++				MX6QDL_PAD_DISP0_DAT4__GPIO4_IO25	0x178b0
+ 				/* GPS reset */
+-				MX6QDL_PAD_SD2_CLK__GPIO1_IO10          0x1b0b0
++				MX6QDL_PAD_SD2_CLK__GPIO1_IO10		0x1b0b0
+ 				/* LTE reset */
+-				MX6QDL_PAD_SD2_DAT0__GPIO1_IO15         0x1b0b0
++				MX6QDL_PAD_SD2_DAT0__GPIO1_IO15		0x1b0b0
+ 				/* LTE RF reset */
+-				MX6QDL_PAD_SD2_CMD__GPIO1_IO11          0x1b0b0
++				MX6QDL_PAD_SD2_CMD__GPIO1_IO11		0x1b0b0
+ 			>;
+ 		};
+ 
+-                /* Elecex  GPS support */
+-                pinctrl_uart3_3: uart3grp-3 {   /* RX/TX */
+-                        fsl,pins = <
+-                                MX6QDL_PAD_EIM_D25__UART3_RX_DATA       0x1b0b1
+-                                MX6QDL_PAD_EIM_D24__UART3_TX_DATA       0x1b0b1
+-                        >;
+-                };
++		/* Elecex  GPS support */
++		pinctrl_uart3_3: uart3grp-3 {   /* RX/TX */
++			fsl,pins = <
++				MX6QDL_PAD_EIM_D25__UART3_RX_DATA	0x1b0b1
++				MX6QDL_PAD_EIM_D24__UART3_TX_DATA	0x1b0b1
++			>;
++		};
+ 	};
+ };
+ 
+-- 
+2.7.4
+
