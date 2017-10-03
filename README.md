@@ -11,6 +11,9 @@ Please make sure your host PC is running Ubuntu 14.04/16.04 64-bit and install t
     $ sudo apt-get install docbook-utils python-pysqlite2 help2man make gcc g++ desktop-file-utils libgl1-mesa-dev
     $ sudo apt-get install libglu1-mesa-dev mercurial automake groff curl lzop asciidoc u-boot-tools dos2unix mtd-utils
     $ sudo apt-get install pv
+    $ sudo dpkg --add-architecture i386
+    $ sudo apt-get update
+    $ sudo apt-get install g++-multilib libssl-dev:i386 libcrypto++-dev:i386 zlib1g-dev:i386
 
 Download Yocto Morty based on Freescale Community BSP
 -----------------------------------------------------
