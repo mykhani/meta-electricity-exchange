@@ -8,6 +8,7 @@ SRC_URI_append = " \
 	file://0005-set-pad-mux-and-control-for-GPS-and-LTE.patch \
 	file://0006-fix-indentation-in-the-device-tree.patch \
 	file://0007-set-the-mux-and-pad-control-of-heartbeat-pins.patch \
+	file://0008-add-lvds-based-display-node-in-dts.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
