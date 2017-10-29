@@ -1,0 +1,33 @@
+From 4b36ccf47947164bad04f4db098053574026736a Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sun, 29 Oct 2017 13:37:28 +0000
+Subject: [PATCH] enable ppp support for LTE
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/configs/imx_v7_var_defconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/arch/arm/configs/imx_v7_var_defconfig b/arch/arm/configs/imx_v7_var_defconfig
+index 6f9ad14..5ec7238 100644
+--- a/arch/arm/configs/imx_v7_var_defconfig
++++ b/arch/arm/configs/imx_v7_var_defconfig
+@@ -193,6 +193,15 @@ CONFIG_SMC911X=y
+ CONFIG_SMSC911X=y
+ # CONFIG_NET_VENDOR_STMICRO is not set
+ CONFIG_MICREL_PHY=y
++CONFIG_PPP=y
++# CONFIG_PPP_BSDCOMP is not set
++CONFIG_PPP_DEFLATE=y
++CONFIG_PPP_FILTER=y
++# CONFIG_PPP_MPPE is not set
++# CONFIG_PPP_MULTILINK is not set
++# CONFIG_PPPOE is not set
++CONFIG_PPP_ASYNC=y
++CONFIG_PPP_SYNC_TTY=y
+ CONFIG_USB_PEGASUS=m
+ CONFIG_USB_RTL8150=m
+ CONFIG_USB_RTL8152=m
+-- 
+2.7.4
+

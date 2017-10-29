@@ -10,6 +10,7 @@ SRC_URI_append = " \
 	file://0007-set-the-mux-and-pad-control-of-heartbeat-pins.patch \
 	file://0008-add-lvds-based-display-node-in-dts.patch \
 	file://0009-enable-usb-touch-screen-driver.patch \
+	file://0010-enable-ppp-support-for-LTE.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
