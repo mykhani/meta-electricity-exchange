@@ -11,6 +11,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit python-dir
 
+DEBIAN_GIT_URI = "git://github.com/ystk"
+DEBIAN_GIT_PROTOCOL = "https"
+DEBIAN_GIT_PREFIX = "debian-"
+
 # Follow Debian:
 # ${S}/debian/*.install
 do_install(){

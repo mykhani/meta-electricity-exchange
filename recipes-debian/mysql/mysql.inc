@@ -22,4 +22,31 @@ LIC_FILES_CHKSUM = "\
 	file://cmd-line-utils/libedit/np/strlcat.c;beginline=4;endline=18;md5=0842004924db787e8550a43e205891a7 \
 	"
 
-inherit cmake
+DEBIAN_GIT_URI = "git://github.com/ystk"
+DEBIAN_GIT_PROTOCOL = "https"
+DEBIAN_GIT_PREFIX = "debian-"
+
+inherit cmake update-rc.d useradd
+
+INITSCRIPT_PACKAGES = "${PN}-server"
+INITSCRIPT_NAME = "mysql"
+INITSCRIPT_PARAMS = "start 45 5 . stop 45 0 6 1 ."
+
+USERADD_PACKAGES = "${PN}-server"
+USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g nogroup --shell /bin/false mysql"
+
+
+pkg_postinst_${PN}-server-core () {
+    if [ "x$D" != "x" ]; then
+        exit 1
+    fi
+
+    #Install the database
+    test -d /usr/bin || mkdir -p /usr/bin
+    test -e /usr/bin/hostname || ln -s /bin/hostname /usr/bin/hostname
+    mkdir /var/lib/mysql
+    chown mysql.nogroup /var/lib/mysql
+
+    mysql_install_db --user=mysql --basedir=/usr/ --ldata=/var/lib/mysql/
+
+}

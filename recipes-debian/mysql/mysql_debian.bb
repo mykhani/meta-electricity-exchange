@@ -45,7 +45,9 @@ do_install_append() {
 	install -D -m 0644 ${S}/debian/*.mysql-server.logrotate \
 		${D}${sysconfdir}/logrotate.d/mysql-server
 	install -D -m 0644 ${S}/debian/additions/my.cnf \
-		${D}${sysconfdir}/mysql/my.cnf
+		${D}${sysconfdir}/mysql/debian.cnf
+	install -D -m 0755 ${S}/debian/additions/debian-start.inc.sh \
+                ${D}${datadir}/mysql/debian-start.inc.sh
 	install -D -m 0755 ${S}/debian/additions/debian-start \
 		${D}${sysconfdir}/mysql/debian-start
 	install -D -m 0644 ${S}/debian/additions/mysqld_safe_syslog.cnf \
@@ -70,12 +72,20 @@ do_install_append() {
 	rm ${D}${bindir}/mysqlaccess.conf ${D}${bindir}/mysql_embedded \
 		${D}${bindir}/mysql_client_test_embedded \
 		${D}${bindir}/mysqltest_embedded
+	# create required dirs
+	if [ ! -d "${D}${localstatedir}/log/mysql" ]; then
+		install -d ${D}${localstatedir}/log/mysql
+	fi
+
+	if [ ! -d "${D}${localstatedir}/lib/mysql" ]; then
+		install -d ${D}${localstatedir}/lib/mysql
+	fi
 }
 
 PACKAGES += "mysql-testsuite"
 FILES_libmysqlclient = "${libdir}/libmysqlclient.so.* ${libdir}/libmysqlclient_r.so.*"
 FILES_libmysqld-pic = "${bindir}/mysql_config_pic"
-FILES_mysql-common = "${sysconfdir}/${PN}/my.cnf"
+FILES_mysql-common = "${sysconfdir}/${PN}/debian.cnf ${localstatedir}/*"
 FILES_mysql-server = "\
 	${sysconfdir}/* ${bindir}/msql2mysql ${bindir}/myisamchk \
 	${bindir}/myisamlog ${bindir}/myisampack \
