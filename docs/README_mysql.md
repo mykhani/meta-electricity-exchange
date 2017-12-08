@@ -17,7 +17,7 @@ Uptime:                 1 min 34 sec
 
 Threads: 1  Questions: 4  Slow queries: 0  Opens: 33  Flush tables: 1  Open tables: 26  Queries per second avg: 0.042.
 ```
-** Create a test database **
+**Create a test database**
 
 ```bash
 root@elecex-zgateway-mx6:~# mysql -u root -p
