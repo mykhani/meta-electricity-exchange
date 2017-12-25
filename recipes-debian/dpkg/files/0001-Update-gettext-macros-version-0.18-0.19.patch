@@ -1,0 +1,40 @@
+From 3f1a0ee5fdf53c7eaff3377ddcb4e73ac502db9c Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Mon, 25 Dec 2017 02:12:50 +0000
+Subject: [PATCH] Update gettext macros  version 0.18 -> 0.19
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ dselect/po/Makefile.in.in | 2 +-
+ scripts/po/Makefile.in.in | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/dselect/po/Makefile.in.in b/dselect/po/Makefile.in.in
+index fce63a6..0f72964 100644
+--- a/dselect/po/Makefile.in.in
++++ b/dselect/po/Makefile.in.in
+@@ -9,7 +9,7 @@
+ # General Public License and is *not* in the public domain.
+ #
+ # Origin: gettext-0.18.2
+-GETTEXT_MACRO_VERSION = 0.18
++GETTEXT_MACRO_VERSION = 0.19
+ 
+ PACKAGE = @PACKAGE@
+ VERSION = @VERSION@
+diff --git a/scripts/po/Makefile.in.in b/scripts/po/Makefile.in.in
+index fce63a6..0f72964 100644
+--- a/scripts/po/Makefile.in.in
++++ b/scripts/po/Makefile.in.in
+@@ -9,7 +9,7 @@
+ # General Public License and is *not* in the public domain.
+ #
+ # Origin: gettext-0.18.2
+-GETTEXT_MACRO_VERSION = 0.18
++GETTEXT_MACRO_VERSION = 0.19
+ 
+ PACKAGE = @PACKAGE@
+ VERSION = @VERSION@
+-- 
+2.7.4
+
