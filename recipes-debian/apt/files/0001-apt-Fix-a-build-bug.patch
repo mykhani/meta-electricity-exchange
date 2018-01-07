@@ -1,0 +1,37 @@
+From a981f0cbea1c8cf5ab3c2ea4dac5d63ce3692459 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sat, 9 Dec 2017 12:45:42 +0000
+Subject: [PATCH] apt: Fix a build bug
+
+Fix bug https://bugs.launchpad.net/ubuntu/+source/apt/+bug/1477299
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ cmdline/apt-get.cc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmdline/apt-get.cc b/cmdline/apt-get.cc
+index a285377..c9785a3 100644
+--- a/cmdline/apt-get.cc
++++ b/cmdline/apt-get.cc
+@@ -630,7 +630,7 @@ static bool DoDownload(CommandLine &CmdL)
+    if (Cache.ReadOnlyOpen() == false)
+       return false;
+ 
+-   APT::CacheSetHelper helper(c0out);
++   CacheSetHelperAPTGet helper(c0out);
+    APT::VersionSet verset = APT::VersionSet::FromCommandLine(Cache,
+ 		CmdL.FileList + 1, APT::VersionSet::CANDIDATE, helper);
+ 
+@@ -1528,7 +1528,7 @@ static bool DoChangelog(CommandLine &CmdL)
+    if (Cache.ReadOnlyOpen() == false)
+       return false;
+    
+-   APT::CacheSetHelper helper(c0out);
++   CacheSetHelperAPTGet helper(c0out);
+    APT::VersionList verset = APT::VersionList::FromCommandLine(Cache,
+ 		CmdL.FileList + 1, APT::VersionList::CANDIDATE, helper);
+    if (verset.empty() == true)
+-- 
+2.7.4
+
