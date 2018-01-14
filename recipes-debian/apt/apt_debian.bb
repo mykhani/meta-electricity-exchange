@@ -49,6 +49,7 @@ do_install() {
 		${D}${datadir}/bug/apt/script
 	cp -r ${B}/locale ${D}${datadir}
 
+	cp -a ${S}/vendor/ubuntu/sources.list ${S}/vendor/debian/sources.list
 	install -D -m 0644 ${S}/vendor/debian/sources.list \
 		${D}${docdir}/${DPN}/examples/sources.list
 	#follow debian/apt.dirs
