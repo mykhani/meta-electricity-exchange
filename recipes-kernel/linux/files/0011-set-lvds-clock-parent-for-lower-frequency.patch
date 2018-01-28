@@ -1,0 +1,31 @@
+From 299a6ba221b3048dab9d8556965591410156a0c7 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sun, 28 Jan 2018 07:21:44 +0000
+Subject: [PATCH] set lvds clock parent for lower frequency
+
+For 320x240 display resolution we need lower
+frequency on the lvds clock, with the default
+clock parent that frequency ranage is not possible
+so we need to set it to lower frequency clock parent.
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi b/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
+index b45f2f3..1aa5758 100644
+--- a/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
++++ b/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
+@@ -43,3 +43,8 @@
+ 		};
+ 	};
+ };
++
++&clks {
++	fsl,ldb-di0-parent = <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>;
++	fsl,ldb-di1-parent = <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>;
++};
+-- 
+2.7.4
+

@@ -11,6 +11,7 @@ SRC_URI_append = " \
 	file://0008-add-lvds-based-display-node-in-dts.patch \
 	file://0009-enable-usb-touch-screen-driver.patch \
 	file://0010-enable-ppp-support-for-LTE.patch \
+	file://0011-set-lvds-clock-parent-for-lower-frequency.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
