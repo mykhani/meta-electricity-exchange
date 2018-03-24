@@ -51,12 +51,12 @@ index 0000000..485a0d5
 +				clock-frequency = <6500000>;
 +				hactive = <320>;
 +				vactive = <240>;
-+				hback-porch = <68>;
++				hback-porch = <46>;
 +				hfront-porch = <20>;
-+				vback-porch = <18>;
++				vback-porch = <16>;
 +				vfront-porch = <4>;
-+				hsync-len = <0>;
-+				vsync-len = <0>;
++				hsync-len = <22>;
++				vsync-len = <2>;
 +			};
 +		};
 +	};
