@@ -1,0 +1,44 @@
+From 060c6d774a7e3626d99733acad173336ff4198c8 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sun, 18 Feb 2018 08:28:44 +0000
+Subject: [PATCH] add resistive touch panel node in dts
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ .../boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi   | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi b/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
+index d649a1a..24bb698 100644
+--- a/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
++++ b/arch/arm/boot/dts/imx6q-elecex-zgateway-rdisplay.dtsi
+@@ -48,3 +48,26 @@
+ 	fsl,ldb-di0-parent = <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>;
+ 	fsl,ldb-di1-parent = <&clks IMX6QDL_CLK_PLL5_VIDEO_DIV>;
+ };
++
++&ecspi3 {
++	/* Touch */
++	ads7846@0 {
++		reg = <0>;      /* CS0 */
++		compatible = "ti,ads7846";
++		interrupt-parent = <&gpio4>;
++		interrupts = <25 0>;
++		spi-max-frequency = <1500000>;
++		pendown-gpio = <&gpio4 25 0>;
++		ti,x-min = /bits/ 16 <125>;
++		ti,x-max = /bits/ 16 <4008>;
++		ti,y-min = /bits/ 16 <282>;
++		ti,y-max = /bits/ 16 <3864>;
++		ti,x-plate-ohms = /bits/ 16 <180>;
++		ti,pressure-max = /bits/ 16 <255>;
++		ti,debounce-max = /bits/ 16 <10>;
++		ti,debounce-tol = /bits/ 16 <3>;
++		ti,debounce-rep = /bits/ 16 <1>;
++		ti,settle-delay-usec = /bits/ 16 <150>;
++		ti,keep-vref-on;
++	};
++};
+-- 
+2.7.4
+
