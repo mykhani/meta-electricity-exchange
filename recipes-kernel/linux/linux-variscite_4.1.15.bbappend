@@ -13,6 +13,7 @@ SRC_URI_append = " \
 	file://0010-enable-ppp-support-for-LTE.patch \
 	file://0011-set-lvds-clock-parent-for-lower-frequency.patch \
 	file://0012-add-resistive-touch-panel-node-in-dts.patch \
+	file://0013-add-180-degree-rotation-support.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
