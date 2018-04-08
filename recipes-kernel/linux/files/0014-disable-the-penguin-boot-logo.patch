@@ -1,0 +1,29 @@
+From ac04ff8b1b78ebc6156b634487174dd330172f53 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sun, 8 Apr 2018 13:41:42 +0100
+Subject: [PATCH] disable the penguin boot logo
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/configs/imx_v7_var_defconfig | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/arch/arm/configs/imx_v7_var_defconfig b/arch/arm/configs/imx_v7_var_defconfig
+index f308ed3..047a830 100644
+--- a/arch/arm/configs/imx_v7_var_defconfig
++++ b/arch/arm/configs/imx_v7_var_defconfig
+@@ -318,10 +318,7 @@ CONFIG_LCD_PLATFORM=y
+ CONFIG_BACKLIGHT_PWM=y
+ CONFIG_FRAMEBUFFER_CONSOLE=y
+ CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-# CONFIG_LOGO_LINUX_CLUT224 is not set
++# CONFIG_LOGO is not set
+ CONFIG_SOUND=y
+ CONFIG_SND=y
+ CONFIG_SND_USB_AUDIO=m
+-- 
+2.7.4
+

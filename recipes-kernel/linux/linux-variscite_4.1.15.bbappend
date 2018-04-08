@@ -14,6 +14,7 @@ SRC_URI_append = " \
 	file://0011-set-lvds-clock-parent-for-lower-frequency.patch \
 	file://0012-add-resistive-touch-panel-node-in-dts.patch \
 	file://0013-add-180-degree-rotation-support.patch \
+	file://0014-disable-the-penguin-boot-logo.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
