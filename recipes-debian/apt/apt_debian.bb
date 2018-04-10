@@ -8,6 +8,7 @@ require apt.inc
 # and gtest haven't been available in meta-debian,yet.
 SRC_URI += " \
 	file://gtest-skip-fix.patch \
+	file://debian.list \
 "
 DEPENDS += "curl db dpkg"
 RDEPENDS_${PN} += "dpkg"
@@ -62,6 +63,8 @@ do_install() {
 	install -d ${D}${localstatedir}/lib/${DPN}/mirrors/partial
 	install -d ${D}${localstatedir}/lib/${DPN}/periodic
 	install -d ${D}${localstatedir}/log/${DPN}
+	# add sources.list for electricity exchange compatible debian
+	install -m 0644 ${WORKDIR}/debian.list ${D}${sysconfdir}/${DPN}/sources.list.d
 
 	#Write the correct apt-architecture to apt.conf
 	APT_CONF=${D}${sysconfdir}/apt/apt.conf
