@@ -1,0 +1,26 @@
+From a9075be97c2877b7f1fece201f2b6c5486a22e65 Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Sat, 21 Apr 2018 08:12:52 +0100
+Subject: [PATCH] set 180 degree rotate for lvds display
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ include/configs/mx6var_som.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/mx6var_som.h b/include/configs/mx6var_som.h
+index 1fbffdf..6d54c5c 100644
+--- a/include/configs/mx6var_som.h
++++ b/include/configs/mx6var_som.h
+@@ -245,7 +245,7 @@
+ 				"video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24; " \
+ 		"else " \
+ 			"setenv bootargs ${bootargs} " \
+-				"video=mxcfb0:dev=ldb; " \
++				"video=mxcfb0:dev=ldb,rotate=3; " \
+ 		"fi; " \
+ 		"setenv bootargs ${bootargs} " \
+ 			"video=mxcfb1:off video=mxcfb2:off video=mxcfb3:off;\0"
+-- 
+2.7.4
+
