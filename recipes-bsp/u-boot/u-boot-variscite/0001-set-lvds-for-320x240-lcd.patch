@@ -1,0 +1,119 @@
+From 092451a33fd5bae461e6ce484bea8995fa07186e Mon Sep 17 00:00:00 2001
+From: Adeel Arshad <embeddi.zone@gmail.com>
+Date: Wed, 31 Jan 2018 19:50:06 +0000
+Subject: [PATCH] set lvds for 320x240 lcd
+
+Signed-off-by: Adeel Arshad <embeddi.zone@gmail.com>
+---
+ arch/arm/include/asm/arch-mx6/crm_regs.h |  4 +++
+ board/variscite/mx6var_som/mx6var_som.c  | 55 ++++++++++++++++++++++++--------
+ 2 files changed, 45 insertions(+), 14 deletions(-)
+
+diff --git a/arch/arm/include/asm/arch-mx6/crm_regs.h b/arch/arm/include/asm/arch-mx6/crm_regs.h
+index 2d26510..bd54c1b 100644
+--- a/arch/arm/include/asm/arch-mx6/crm_regs.h
++++ b/arch/arm/include/asm/arch-mx6/crm_regs.h
+@@ -1372,6 +1372,10 @@ struct mxc_ccm_reg {
+ #define BM_ANADIG_PLL_VIDEO_DIV_SELECT 0x0000007F
+ #define BF_ANADIG_PLL_VIDEO_DIV_SELECT(v)  \
+ 	(((v) << 0) & BM_ANADIG_PLL_VIDEO_DIV_SELECT)
++#define BP_ANADIG_PLL_VIDEO_POST_DIV_SELECT      19
++#define BM_ANADIG_PLL_VIDEO_POST_DIV_SELECT 0x00180000
++#define BF_ANADIG_PLL_VIDEO_POST_DIV_SELECT(v)  \
++	(((v) << 19) & BM_ANADIG_PLL_VIDEO_POST_DIV_SELECT)
+ 
+ #define BP_ANADIG_PLL_VIDEO_NUM_RSVD0      30
+ #define BM_ANADIG_PLL_VIDEO_NUM_RSVD0 0xC0000000
+diff --git a/board/variscite/mx6var_som/mx6var_som.c b/board/variscite/mx6var_som/mx6var_som.c
+index cf0b7dd..0583222 100644
+--- a/board/variscite/mx6var_som/mx6var_som.c
++++ b/board/variscite/mx6var_som/mx6var_som.c
+@@ -923,23 +923,52 @@ struct display_info_t const displays[] = {{
+ 	.detect	= detect_mx6cb_rdisplay,
+ 	.enable	= lvds_enable_disable,
+ 	.mode	= {
+-		.name           = "VAR-WVGA MX6CB-R",
++		.name           = "ELECX-CGW MX6CB-R",
+ 		.refresh        = 60,  /* optional */
+-		.xres           = 800,
+-		.yres           = 480,
+-		.pixclock       = MHZ2PS(50),
+-		.left_margin    = 0,
+-		.right_margin   = 40,
+-		.upper_margin   = 20,
+-		.lower_margin   = 13,
+-		.hsync_len      = 48,
+-		.vsync_len      = 3,
++		.xres           = 320,
++		.yres           = 240,
++		.pixclock       = 153846,
++		.left_margin    = 46,
++		.right_margin   = 20,
++		.upper_margin   = 16,
++		.lower_margin   = 4,
++		.hsync_len      = 22,
++		.vsync_len      = 2,
+ 		.sync           = FB_SYNC_EXT,
+ 		.vmode          = FB_VMODE_NONINTERLACED
+ } } };
+ 
+ size_t display_count = ARRAY_SIZE(displays);
+ 
++static void enable_vpll(void)
++{
++	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
++	int timeout = 100000;
++
++	setbits_le32(&ccm->analog_pll_video, BM_ANADIG_PLL_VIDEO_POWERDOWN);
++
++	clrsetbits_le32(&ccm->analog_pll_video,
++			BM_ANADIG_PLL_VIDEO_DIV_SELECT |
++			BM_ANADIG_PLL_VIDEO_POST_DIV_SELECT,
++			BF_ANADIG_PLL_VIDEO_DIV_SELECT(37) |
++			BF_ANADIG_PLL_VIDEO_POST_DIV_SELECT(1));
++
++	writel(BF_ANADIG_PLL_VIDEO_NUM_A(11), &ccm->analog_pll_video_num);
++	writel(BF_ANADIG_PLL_VIDEO_DENOM_B(12), &ccm->analog_pll_video_denom);
++
++	clrbits_le32(&ccm->analog_pll_video, BM_ANADIG_PLL_VIDEO_POWERDOWN);
++
++	while (timeout--)
++		if (readl(&ccm->analog_pll_video) & BM_ANADIG_PLL_VIDEO_LOCK)
++			break;
++	if (timeout < 0)
++		printf("Warning: video pll lock timeout!\n");
++
++	clrsetbits_le32(&ccm->analog_pll_video,
++			BM_ANADIG_PLL_VIDEO_BYPASS,
++			BM_ANADIG_PLL_VIDEO_ENABLE);
++}
++
+ static void setup_display(void)
+ {
+ 	struct mxc_ccm_reg *mxc_ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
+@@ -953,6 +982,7 @@ static void setup_display(void)
+ 	gpio_direction_output(VAR_SOM_BACKLIGHT_EN , 0);
+ 
+ 	enable_ipu_clock();
++	enable_vpll();
+ 	imx_setup_hdmi();
+ 
+ 	/* Turn on LDB0, LDB1, IPU,IPU DI0 clocks */
+@@ -960,13 +990,10 @@ static void setup_display(void)
+ 	reg |=  MXC_CCM_CCGR3_LDB_DI0_MASK | MXC_CCM_CCGR3_LDB_DI1_MASK;
+ 	writel(reg, &mxc_ccm->CCGR3);
+ 
+-	/* set LDB0, LDB1 clk select to 011/011 */
++	/* set LDB0, LDB1 clk select to 000/000; PLL5 / Vidoe PLL */
+ 	reg = readl(&mxc_ccm->cs2cdr);
+ 	reg &= ~(MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_MASK
+ 		 | MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_MASK);
+-	/* 1 -> ~50MHz , 2 -> ~56MHz, 3 -> ~75MHz, 4 -> ~68MHz */
+-	reg |= (1 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET)
+-	      | (1 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET);
+ 	writel(reg, &mxc_ccm->cs2cdr);
+ 
+ 	reg = readl(&mxc_ccm->cscmr2);
+-- 
+2.7.4
+
