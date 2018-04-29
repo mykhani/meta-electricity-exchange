@@ -15,6 +15,7 @@ SRC_URI_append = " \
 	file://0012-add-resistive-touch-panel-node-in-dts.patch \
 	file://0013-add-180-degree-rotation-support.patch \
 	file://0014-disable-the-penguin-boot-logo.patch \
+	file://0015-invert-x-and-y-axis-of-usb-touch-panel.patch \
 "
 
 LOCALVERSION_elecex-zgateway-mx6 = "-mx6"
