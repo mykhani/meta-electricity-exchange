@@ -1,28 +1,28 @@
-**To check if the APT package manager is working**
+**Debian based APT package manager**
 
 The APT package manager has been enabled for package management which allows
 using the existing debian package repositories compatible with armhf
-architecture.
+architecture. The current yocto build is compatible with debian jessie version.
 
-Using the package repository requires manually adding the path of the 
-package repositories into a file at /etc/apt/sources.list.d/ with .list
-extension.
+More apt repositories compatible with debian jessie version can be added by
+modifying file /etc/apt/sources.list.d/debian.list.
 
-For example, the repositories for debian stretch version can be added by
-creating a file /etc/apt/sources.list.d/debian.list with below contents:
+**Enabling secure APT**
+To make sure the package being installed is authentic, apt uses gpg tool to
+sign package archives with the private key of repository and check their
+signatures when they are being downloaded for installation.
+
+The packages are signed with the private key of repository and apt needs
+to know the public key of the repository to verify the signature.
+
+In order to use secure apt, make sure to install the public key of the
+debian repository following below steps:
 
 ```bash
-root@elecex-zgateway-mx6:~# cat /etc/apt/sources.list.d/debian.list
-deb  http://deb.debian.org/debian stretch main contrib non-free
-deb-src  http://deb.debian.org/debian stretch main contrib non-free
-
-deb  http://deb.debian.org/debian stretch-updates main contrib non-free
-deb-src  http://deb.debian.org/debian stretch-updates main contrib non-free
-
-deb http://security.debian.org/ stretch/updates main contrib non-free
-deb-src http://security.debian.org/ stretch/updates main contrib non-free
+root@elecex-zgateway-mx6:~# gpg --keyserver pgpkeys.mit.edu --recv-key  8B48AD6246925553
+root@elecex-zgateway-mx6:~# gpg -a --export 8B48AD6246925553 | apt-key add -
 ```
-After creating the above file, run below command
+After entering above commands, run below command
 ```bash
 root@elecex-zgateway-mx6:~# apt-get update
 ```

@@ -3,4 +3,5 @@ IMAGE_INSTALL += " \
     ppp \
     mysql mysql-server mysql-server-core \
     apt \
+    gnupg \
 "
